@@ -23,9 +23,9 @@ end
 length=100;
 
 imlow=imresize(image,[round(size(image,1)*(length/size(image,2))) length]);
-[x,y]=find(imlow);
+[y,x] = meshgrid(1:size(imlow,2),1:size(imlow,1));
 R=imlow(:);
-reg=MultiPolyRegress([x y],double(R),2);
+reg=MultiPolyRegress([x(:) y(:)],double(R),2);
 surflow=reg.yhat;
 surflow=reshape(surflow,[round(size(image,1)*(length/size(image,2))) length]);
 surf=imresize(surflow,size(image));
